@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood → UI Transformer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Main card -->
+        <div class="card">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="title">Mood → UI Transformer</h1>
+                <p class="subtitle">Transform your UI based on your mood</p>
+            </div>
+
+            <!-- Mood Selection Section -->
+            <div class="mood-section">
+                <!-- Dropdown for predefined moods -->
+                <div class="input-group">
+                    <label for="mood-dropdown">Select Your Mood:</label>
+                    <select id="mood-dropdown" class="mood-select">
+                        <option value="">-- Choose a mood --</option>
+                        <option value="happy">😊 Happy</option>
+                        <option value="sad">😢 Sad</option>
+                        <option value="stressed">😰 Stressed</option>
+                        <option value="energetic">⚡ Energetic</option>
+                        <option value="calm">😌 Calm</option>
+                    </select>
+                </div>
+
+                <!-- Custom mood input -->
+                <div class="input-group">
+                    <label for="mood-input">Or type a custom mood:</label>
+                    <input 
+                        type="text" 
+                        id="mood-input" 
+                        class="mood-input" 
+                        placeholder="e.g., tired, motivated, confused..."
+                    >
+                </div>
+
+                <!-- Transform Button -->
+                <button id="transform-btn" class="transform-btn" disabled>
+                    Transform UI
+                </button>
+            </div>
+
+            <!-- Mood Display Section -->
+            <div class="mood-display">
+                <div id="mood-emoji" class="mood-emoji">🌈</div>
+                <h2 id="mood-title" class="mood-title">Welcome!</h2>
+                <p id="mood-description" class="mood-description">
+                    Select a mood to transform your UI
+                </p>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="info-section">
+                <p class="info-text">
+                    💡 Tip: Try different moods and custom emotions to see the transformation!
+                </p>
+            </div>
+        </div>
+
+        <!-- Floating elements for visual effect -->
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

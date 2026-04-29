@@ -1,0 +1,456 @@
+/* ============================================
+   ROOT CSS VARIABLES
+   These will be dynamically updated by JavaScript
+   ============================================ */
+:root {
+    /* Primary Colors */
+    --bg-color: #ffffff;
+    --bg-gradient-1: #f5f7fa;
+    --bg-gradient-2: #e0e7ff;
+    --text-color: #2d3748;
+    --accent-color: #667eea;
+    --accent-light: #a5b4fc;
+    
+    /* Animations */
+    --animation-speed: 0.8s;
+    --animation-type: ease-in-out;
+    
+    /* Timing for time-based variations */
+    --brightness-modifier: 1;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+    color: var(--text-color);
+    transition: background var(--animation-speed) var(--animation-type),
+                color var(--animation-speed) var(--animation-type);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* ============================================
+   CONTAINER & CARD LAYOUT
+   ============================================ */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    z-index: 10;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    animation: slideUp 0.6s var(--animation-type);
+    transition: box-shadow var(--animation-speed) var(--animation-type);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   HEADER SECTION
+   ============================================ */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title {
+    font-size: 2.5em;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 1em;
+    color: var(--text-color);
+    opacity: 0.7;
+    font-weight: 400;
+}
+
+/* ============================================
+   MOOD SELECTION SECTION
+   ============================================ */
+.mood-section {
+    margin-bottom: 40px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--text-color);
+}
+
+.mood-select,
+.mood-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--accent-light);
+    border-radius: 10px;
+    background: white;
+    color: var(--text-color);
+    font-size: 1em;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.mood-select:hover,
+.mood-input:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.mood-select:focus,
+.mood-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.mood-select option {
+    background: white;
+    color: var(--text-color);
+    padding: 10px;
+}
+
+/* ============================================
+   TRANSFORM BUTTON
+   ============================================ */
+.transform-btn {
+    width: 100%;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+}
+
+.transform-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4);
+}
+
+.transform-btn:not(:disabled):active {
+    transform: translateY(0);
+}
+
+.transform-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: linear-gradient(135deg, #ccc 0%, #aaa 100%);
+}
+
+/* Ripple effect on button click */
+.transform-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+/* ============================================
+   MOOD DISPLAY SECTION
+   ============================================ */
+.mood-display {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, 
+        rgba(102, 126, 234, 0.05) 0%, 
+        rgba(165, 180, 252, 0.05) 100%);
+    border-radius: 15px;
+    margin-bottom: 30px;
+    transition: all var(--animation-speed) var(--animation-type);
+}
+
+.mood-emoji {
+    font-size: 4em;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.mood-title {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.mood-description {
+    font-size: 1em;
+    color: var(--text-color);
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* ============================================
+   INFO SECTION
+   ============================================ */
+.info-section {
+    text-align: center;
+    padding: 20px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.info-text {
+    font-size: 0.9em;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* ============================================
+   FLOATING SHAPES (BACKGROUND DECORATION)
+   ============================================ */
+.floating-shapes {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.05;
+    animation: float-infinite 20s infinite ease-in-out;
+}
+
+.shape-1 {
+    width: 200px;
+    height: 200px;
+    background: var(--accent-color);
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    background: var(--accent-light);
+    bottom: -75px;
+    right: -75px;
+    animation-delay: 5s;
+}
+
+.shape-3 {
+    width: 100px;
+    height: 100px;
+    background: var(--accent-color);
+    top: 50%;
+    right: 10%;
+    animation-delay: 10s;
+}
+
+@keyframes float-infinite {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(20px, -20px) scale(1.1);
+    }
+    50% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+    75% {
+        transform: translate(20px, 20px) scale(1.05);
+    }
+}
+
+/* ============================================
+   MOOD-SPECIFIC ANIMATIONS
+   ============================================ */
+
+/* Happy - Bounce Animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+body.mood-happy .card {
+    animation: slideUp 0.6s ease-out, bounce 0.8s ease-in-out;
+}
+
+/* Sad - Fade Animation */
+@keyframes fade {
+    0%, 100% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+body.mood-sad .mood-display {
+    animation: fade 2s ease-in-out infinite;
+}
+
+/* Stressed - Shake Animation */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    75% {
+        transform: translateX(-5px);
+    }
+}
+
+body.mood-stressed .card {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Energetic - Pulse Animation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+body.mood-energetic .mood-emoji {
+    animation: pulse 0.6s ease-in-out infinite !important;
+}
+
+/* Calm - Smooth Transitions */
+@keyframes smooth-glow {
+    0%, 100% {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+        box-shadow: 0 30px 80px rgba(102, 126, 234, 0.2);
+    }
+}
+
+body.mood-calm .card {
+    animation: smooth-glow 3s ease-in-out infinite;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 600px) {
+    .card {
+        padding: 30px 25px;
+    }
+
+    .title {
+        font-size: 2em;
+    }
+
+    .mood-emoji {
+        font-size: 3em;
+    }
+
+    .mood-title {
+        font-size: 1.4em;
+    }
+
+    .shape {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 20px 15px;
+    }
+
+    .title {
+        font-size: 1.6em;
+    }
+
+    .input-group label {
+        font-size: 0.85em;
+    }
+
+    .mood-select,
+    .mood-input,
+    .transform-btn {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+}
